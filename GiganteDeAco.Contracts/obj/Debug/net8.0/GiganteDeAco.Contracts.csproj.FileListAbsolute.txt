@@ -1,0 +1,11 @@
+C:\dev\Robo\GiganteDeAco.Contracts\bin\Debug\net8.0\GiganteDeAco.Contracts.deps.json
+C:\dev\Robo\GiganteDeAco.Contracts\bin\Debug\net8.0\GiganteDeAco.Contracts.dll
+C:\dev\Robo\GiganteDeAco.Contracts\bin\Debug\net8.0\GiganteDeAco.Contracts.pdb
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\GiganteDeAco.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\GiganteDeAco.Contracts.AssemblyInfoInputs.cache
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\GiganteDeAco.Contracts.AssemblyInfo.cs
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\GiganteDeAco.Contracts.csproj.CoreCompileInputs.cache
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\GiganteDeAco.Contracts.dll
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\refint\GiganteDeAco.Contracts.dll
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\GiganteDeAco.Contracts.pdb
+C:\dev\Robo\GiganteDeAco.Contracts\obj\Debug\net8.0\ref\GiganteDeAco.Contracts.dll

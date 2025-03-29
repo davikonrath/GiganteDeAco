@@ -1,0 +1,11 @@
+C:\dev\Robo\Robo.Infra\bin\Debug\net8.0\Robo.Infra.deps.json
+C:\dev\Robo\Robo.Infra\bin\Debug\net8.0\Robo.Infra.dll
+C:\dev\Robo\Robo.Infra\bin\Debug\net8.0\Robo.Infra.pdb
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\Robo.Infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\Robo.Infra.AssemblyInfoInputs.cache
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\Robo.Infra.AssemblyInfo.cs
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\Robo.Infra.csproj.CoreCompileInputs.cache
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\Robo.Infra.dll
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\refint\Robo.Infra.dll
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\Robo.Infra.pdb
+C:\dev\Robo\Robo.Infra\obj\Debug\net8.0\ref\Robo.Infra.dll

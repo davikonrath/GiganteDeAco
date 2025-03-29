@@ -1,0 +1,11 @@
+main {
+    flex: 1;
+}
+
+.robo {
+    display: flex;
+    height: 100%;
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: space-between;
+}

@@ -1,0 +1,8 @@
+<ng-container *ngIf="cabeca$ | async as cabeca">
+    <p>Inclinação Cabeça{{obterDescricaoInclinacao(cabeca.inclinacao)}}</p>
+    <button (click)="voltarInclinacaoCabeca()">Inclinar <-</button>
+    <button (click)="avancarInclinacaoCabeca()">Inclinar -></button>
+    <p>Rotação Cabeça {{obterDescricaoRotacao(cabeca.rotacao)}}</p>
+    <button (click)="voltarRotacaoCabeca()">Rotacionar <-</button>
+    <button (click)="avancarRotacaoCabeca()">Rotacionar -></button>
+</ng-container>

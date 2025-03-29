@@ -1,0 +1,15 @@
+html{
+   height: 100vh; 
+}
+
+body {
+    display: flex;
+    height: 98vh;
+    margin: 0;
+    padding: 1vh;
+}
+
+.app{
+    display: flex;
+    flex: 1;
+}

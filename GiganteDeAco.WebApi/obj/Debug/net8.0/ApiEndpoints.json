@@ -1,0 +1,226 @@
+[
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.CabecaController",
+    "Method": "AvancarInclinacao",
+    "RelativePath": "api/cabeca/inclinacao/avancar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.CabecaController",
+    "Method": "VoltarInclinacao",
+    "RelativePath": "api/cabeca/inclinacao/voltar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.CabecaController",
+    "Method": "AvancarRotacao",
+    "RelativePath": "api/cabeca/rotacao/avancar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.CabecaController",
+    "Method": "VoltarRotacao",
+    "RelativePath": "api/cabeca/rotacao/voltar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.CotoveloController",
+    "Method": "AvancarContracao",
+    "RelativePath": "api/cotovelo/contracao/avancar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Lado",
+        "Type": "System.Byte",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.CotoveloController",
+    "Method": "VoltarContracao",
+    "RelativePath": "api/cotovelo/contracao/voltar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Lado",
+        "Type": "System.Byte",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.PulsoController",
+    "Method": "AvancarRotacaao",
+    "RelativePath": "api/pulso/rotacao/avancar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Lado",
+        "Type": "System.Byte",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.PulsoController",
+    "Method": "VoltarRotacao",
+    "RelativePath": "api/pulso/rotacao/voltar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Lado",
+        "Type": "System.Byte",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.RoboController",
+    "Method": "ResetarRobo",
+    "RelativePath": "api/reset",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GiganteDeAco.WebApi.Controllers.RoboController",
+    "Method": "ObterRobo",
+    "RelativePath": "api/robo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "GiganteDeAco.Contracts.Commands.Robos.Obter.ObterRoboResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

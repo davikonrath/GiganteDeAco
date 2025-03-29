@@ -1,0 +1,5 @@
+<ng-content *ngIf="braco$ | async as braco">    
+    <p>Cotovelo {{obterDescricao(braco.contracaoCotovelo)}}</p>
+    <button (click)="voltarContracaoCotovelo()">Contrair <-</button>
+    <button (click)="avancarContracaoCotovelo()">Contrair -></button>
+</ng-content>

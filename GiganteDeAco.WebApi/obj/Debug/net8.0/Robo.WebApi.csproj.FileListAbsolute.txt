@@ -1,0 +1,7 @@
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.csproj.AssemblyReference.cache
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.AssemblyInfoInputs.cache
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.AssemblyInfo.cs
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.csproj.CoreCompileInputs.cache
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\dev\Robo\Robo.WebApi\obj\Debug\net8.0\Robo.WebApi.MvcApplicationPartsAssemblyInfo.cache
