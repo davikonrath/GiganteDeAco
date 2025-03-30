@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RoboService } from '../services/robo.service';
+import { RoboService } from '../../services/robo.service';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { RoboDto } from '../models/roboDto';
-import { map, Observable } from 'rxjs';
-import { Lado } from '../enums/lado';
+import { RoboDto } from '../../models/roboDto';
+import { distinctUntilChanged, finalize, map, Observable, retry, retryWhen, tap, timeout, timer } from 'rxjs';
+import { Lado } from '../../enums/lado';
 import { PulsoComponent } from "../pulso/pulso.component";
 import { CabecaComponent } from "../cabeca/cabeca.component";
 import { CotoveloComponent } from "../cotovelo/cotovelo.component";
@@ -19,13 +19,19 @@ export class RoboComponent implements OnInit{
   constructor(private roboService : RoboService){}
   
   robo$!: Observable<RoboDto>;
-  roboErro$: Observable<Error> | undefined;
+  loading: boolean = false;
+  
   Lado = Lado;
 
   ngOnInit(){
+    this.loading = true;
     this.robo$ = this.roboService
       .obterRobo()
-      .pipe(map((response) => response.robo));
+      .pipe(
+        map((response) => response.robo),
+        retry({count: 5, delay: 5000}),
+        finalize(()=> this.loading = false)
+      )
   };
 
   atualizarRobo(){

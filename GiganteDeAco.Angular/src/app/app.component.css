@@ -4,8 +4,7 @@ main {
 
 .robo {
     display: flex;
-    height: 100%;
-    align-self: stretch;
+    height: 98dvh;
     flex-direction: column;
     justify-content: space-between;
 }

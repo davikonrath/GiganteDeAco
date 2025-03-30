@@ -1,10 +1,10 @@
 import { Component, input, OnInit, output } from '@angular/core';
 import { catchError, EMPTY, map, Observable, of } from 'rxjs';
-import { BracoDto } from '../models/bracoDto';
-import { Lado } from '../enums/lado';
-import { CotoveloService } from '../services/cotovelo.service';
+import { BracoDto } from '../../models/bracoDto';
+import { Lado } from '../../enums/lado';
+import { CotoveloService } from '../../services/cotovelo.service';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { ContracaoCotovelo } from '../enums/contracaoCotovelo';
+import { ContracaoCotovelo } from '../../enums/contracaoCotovelo';
 
 @Component({
   selector: 'cotovelo',

@@ -1,11 +1,11 @@
 import { Component, input, OnInit, output } from '@angular/core';
-import { RoboDto } from '../models/roboDto';
-import { Lado } from '../enums/lado';
-import { PulsoService } from '../services/pulso.service';
-import { catchError, EMPTY, finalize, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { Lado } from '../../enums/lado';
+import { PulsoService } from '../../services/pulso.service';
+import { catchError, debounceTime, EMPTY, finalize, map, Observable, of, shareReplay, startWith, tap } from 'rxjs';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
-import { BracoDto } from '../models/bracoDto';
-import { RotacaoPulso } from '../enums/rotacaoPulso';
+import { BracoDto } from '../../models/bracoDto';
+import { RotacaoPulso } from '../../enums/rotacaoPulso';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'pulso',
@@ -15,7 +15,7 @@ import { RotacaoPulso } from '../enums/rotacaoPulso';
 })
 export class PulsoComponent implements OnInit{
 
-  constructor(private pulsoService: PulsoService){ }
+  constructor(private pulsoService: PulsoService, private toastr: ToastrService){ }
 
   lado = input.required<Lado>();
   braco = input.required<BracoDto>();
@@ -27,7 +27,6 @@ export class PulsoComponent implements OnInit{
   ngOnInit() {
     this.braco$ = of(this.braco());
   }
-
   
   obterDescricao(e: RotacaoPulso): string {
     switch (e) {
@@ -54,10 +53,11 @@ export class PulsoComponent implements OnInit{
     this.braco$ = this.pulsoService.avancarRotacaoPulso(this.lado())
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
-        catchError((err) => {
+        catchError((err, caught) => {
           console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
           this.attRobo.emit()
-          return EMPTY;
+          this.toastr.error(err.error.notificacoes[0].mensagem)
+          return caught;
         }),
       )
   }
@@ -68,6 +68,7 @@ export class PulsoComponent implements OnInit{
       catchError((err) => {
         console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
         this.attRobo.emit()
+        this.toastr.error(err.error.notificacoes[0].mensagem)
         return EMPTY;
       }),
     )

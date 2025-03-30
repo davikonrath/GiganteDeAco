@@ -1,10 +1,10 @@
 import { Component, input, OnInit, output } from '@angular/core';
 import { catchError, EMPTY, map, Observable, of } from 'rxjs';
-import { CabecaDto } from '../models/cabecaDto';
-import { CabecaService } from '../services/cabeca.service';
+import { CabecaDto } from '../../models/cabecaDto';
+import { CabecaService } from '../../services/cabeca.service';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { RotacaoCabeca } from '../enums/rotacaoCabeca';
-import { InclinacaoCabeca } from '../enums/inclinacaoCabeca';
+import { RotacaoCabeca } from '../../enums/rotacaoCabeca';
+import { InclinacaoCabeca } from '../../enums/inclinacaoCabeca';
 
 @Component({
   selector: 'cabeca',

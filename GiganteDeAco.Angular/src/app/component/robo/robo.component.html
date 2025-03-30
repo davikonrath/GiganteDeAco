@@ -1,4 +1,3 @@
-<div>
 <ng-container *ngIf="robo$ | async as robo">
     <div class="cabeca">
         <cabeca [cabeca]="robo.cabeca" (attRobo)="atualizarRobo()"/>
@@ -13,9 +12,13 @@
             <pulso [lado]="Lado.Direito" [braco]="robo.bracoDireito" (attRobo)="atualizarRobo()" />
         </div>
     </div>
+    <div class="comandos">
+        <button (click)="resetarRobo()">RESETAR!</button>
+        <button (click)="atualizarRobo()">RECARREGAR!</button>
+    </div>
 </ng-container>
-</div>
-<div class="comandos">
-    <button (click)="resetarRobo()">RESETAR!</button>
-    <button (click)="atualizarRobo()">RECARREGAR!</button>
-</div>
+<ng-container *ngIf="loading">
+    <div class="loadingScreen">
+        <div class="loading"></div>
+    </div>
+</ng-container>

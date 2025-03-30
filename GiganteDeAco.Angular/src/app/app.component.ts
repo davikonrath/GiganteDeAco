@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RoboComponent } from "./robo/robo.component";
+import { RoboComponent } from "./component/robo/robo.component";
 
 @Component({
   selector: 'app-root',

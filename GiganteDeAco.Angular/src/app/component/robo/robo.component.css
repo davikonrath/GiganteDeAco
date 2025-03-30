@@ -1,0 +1,46 @@
+.cabeca{
+    display: flex;
+    min-width: 100%;
+    height: 30%;
+    justify-content: center;
+}
+
+.corpo{
+    display: flex;
+    width: 100%;
+    height: 30%;
+    justify-content: space-between;
+}
+
+.braco{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.comandos{
+    display: flex;
+    justify-content: center;
+}
+
+.loadingScreen{
+    height: 98dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading{
+    animation: is-rotating 1s infinite;
+    border: 6px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: #51d4db;
+    height: 30dvh;
+    width: 30dvh;
+}
+      
+@keyframes is-rotating {
+    to {
+        transform: rotate(1turn);
+    }
+}
