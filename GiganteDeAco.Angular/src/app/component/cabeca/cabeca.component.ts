@@ -1,10 +1,11 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, input, OnInit, output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY, map, Observable, of } from 'rxjs';
+import { InclinacaoCabeca } from '../../enums/inclinacaoCabeca';
+import { RotacaoCabeca } from '../../enums/rotacaoCabeca';
 import { CabecaDto } from '../../models/cabecaDto';
 import { CabecaService } from '../../services/cabeca.service';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { RotacaoCabeca } from '../../enums/rotacaoCabeca';
-import { InclinacaoCabeca } from '../../enums/inclinacaoCabeca';
 
 @Component({
   selector: 'cabeca',
@@ -12,16 +13,16 @@ import { InclinacaoCabeca } from '../../enums/inclinacaoCabeca';
   templateUrl: './cabeca.component.html',
   styleUrl: './cabeca.component.css'
 })
-export class CabecaComponent implements OnInit{
-  
-  constructor(private cabecaService: CabecaService){ }
-  
+export class CabecaComponent implements OnInit {
+
+  constructor(private cabecaService: CabecaService, private toastr: ToastrService) { }
+
   cabeca = input.required<CabecaDto>();
-  
+
   cabeca$!: Observable<CabecaDto>
   anguloInclinacao: number = 10;
   anguloRotacao: number = 0;
-  
+
   attRobo = output();
 
   ngOnInit() {
@@ -58,8 +59,8 @@ export class CabecaComponent implements OnInit{
     }
   }
 
-  transformCabeca(cabeca : CabecaDto){
-    switch(cabeca.inclinacao){
+  transformCabeca(cabeca: CabecaDto) {
+    switch (cabeca.inclinacao) {
       case InclinacaoCabeca.ParaCima:
         this.anguloInclinacao = 30;
         break;
@@ -71,7 +72,7 @@ export class CabecaComponent implements OnInit{
         break;
     }
 
-    switch(cabeca.rotacao){
+    switch (cabeca.rotacao) {
       case RotacaoCabeca.MenosNoventa:
         this.anguloRotacao = -90;
         break;
@@ -91,51 +92,51 @@ export class CabecaComponent implements OnInit{
     return `rotateX(${this.anguloInclinacao}deg) rotateY(${this.anguloRotacao}deg)`
   }
 
-  avancarRotacaoCabeca(){
+  avancarRotacaoCabeca() {
     this.cabeca$ = this.cabecaService.avancarRotacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
+          this.toastr.error(err.error.notificacoes[0].mensagem)
           this.attRobo.emit()
           return EMPTY;
         }),
-    )
+      )
   }
 
-  voltarRotacaoCabeca(){
+  voltarRotacaoCabeca() {
     this.cabeca$ = this.cabecaService.voltarRotacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
+          this.toastr.error(err.error.notificacoes[0].mensagem)
           this.attRobo.emit()
           return EMPTY;
         }),
-    )
+      )
   }
 
-  avancarInclinacaoCabeca(){
+  avancarInclinacaoCabeca() {
     this.cabeca$ = this.cabecaService.avancarInclinacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
+          this.toastr.error(err.error.notificacoes[0].mensagem)
           this.attRobo.emit()
           return EMPTY;
         }),
-    )
+      )
   }
 
-  voltarInclinacaoCabeca(){
+  voltarInclinacaoCabeca() {
     this.cabeca$ = this.cabecaService.voltarInclinacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
+          this.toastr.error(err.error.notificacoes[0].mensagem)
           this.attRobo.emit()
           return EMPTY;
         }),
-    )
+      )
   }
 }

@@ -1,6 +1,6 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Lado } from '../enums/lado';
 import { ObterRoboResponse } from '../interfaces/obterRoboResponse';
 
@@ -9,20 +9,20 @@ import { ObterRoboResponse } from '../interfaces/obterRoboResponse';
 })
 export class CotoveloService {
 
-  endpoint : string = environment.API_URL + environment.COTOVELO_BASE_URL;
-  
+  endpoint: string = environment.API_URL + environment.COTOVELO_BASE_URL;
+
   constructor(private http: HttpClient) { }
 
-  avancarContracaoCotovelo(lado: Lado){
+  avancarContracaoCotovelo(lado: Lado) {
     const params = new HttpParams()
       .set('Lado', lado);
 
     return this.http.put<ObterRoboResponse>(this.endpoint + '/contracao/avancar', null, { params })
   }
 
-  voltarContracaoCotovelo(lado: Lado){
+  voltarContracaoCotovelo(lado: Lado) {
     const params = new HttpParams()
-    .set('Lado', lado);
+      .set('Lado', lado);
 
     return this.http.put<ObterRoboResponse>(this.endpoint + '/contracao/voltar', null, { params })
   }

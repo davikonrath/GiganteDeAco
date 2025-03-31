@@ -1,30 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { ObterRoboResponse as ObterRoboResponse } from '../interfaces/obterRoboResponse';
+import { ObterRoboResponse } from '../interfaces/obterRoboResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CabecaService {
 
-  endpoint : string = environment.API_URL + environment.CABECA_BASE_URL;
-  
+  endpoint: string = environment.API_URL + environment.CABECA_BASE_URL;
+
   constructor(private http: HttpClient) { }
 
-  avancarRotacaoCabeca(){
+  avancarRotacaoCabeca() {
     return this.http.put<ObterRoboResponse>(this.endpoint + '/rotacao/avancar', {})
   }
 
-  voltarRotacaoCabeca(){
+  voltarRotacaoCabeca() {
     return this.http.put<ObterRoboResponse>(this.endpoint + '/rotacao/voltar', {})
   }
 
-  avancarInclinacaoCabeca(){
+  avancarInclinacaoCabeca() {
     return this.http.put<ObterRoboResponse>(this.endpoint + '/inclinacao/avancar', {})
   }
 
-  voltarInclinacaoCabeca(){
+  voltarInclinacaoCabeca() {
     return this.http.put<ObterRoboResponse>(this.endpoint + '/inclinacao/voltar', {})
   }
 }

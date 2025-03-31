@@ -70,8 +70,8 @@ public class AvancarRotacaoPulsoHandlerTests
         Assert.NotNull(response.Notificacoes);
         Assert.Contains(response.Notificacoes, n => n.Mensagem == "Ação não permitida no status atual.");
         Assert.Contains(response.Notificacoes, n => n.Codigo == 403);
-    }    
-    
+    }
+
     [Fact]
     public async Task HandleAsync_AvancarRotacaoPulso_AcaoNaoPermitidaLimiteMax()
     {
@@ -79,11 +79,11 @@ public class AvancarRotacaoPulsoHandlerTests
         var res = new ObterRoboResponse();
         var robo = new Robo();
         for (int i = 0; i < 3; i++)
-            robo.BracoEsquerdo.Cotovelo.EtapaContracao.Avancar(res);  
-        
+            robo.BracoEsquerdo.Cotovelo.EtapaContracao.Avancar(res);
+
         for (int i = 0; i < 4; i++)
             robo.BracoEsquerdo.Pulso.EtapaRotacao.Avancar(res);
-        
+
         _mockRoboRepository.Setup(repo => repo.ObterRobo()).ReturnsAsync(robo);
 
         var response = await _pulsoHandler.HandleAsync(request);

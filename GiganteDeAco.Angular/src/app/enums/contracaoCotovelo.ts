@@ -1,4 +1,4 @@
-export enum ContracaoCotovelo{
+export enum ContracaoCotovelo {
     EmRepouso,
     Leve,
     Normal,

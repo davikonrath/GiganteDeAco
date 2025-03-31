@@ -1,4 +1,4 @@
-export enum RotacaoPulso{
+export enum RotacaoPulso {
     MenosNoventa,
     MenosQuarentaCinco,
     EmRepouso,

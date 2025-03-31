@@ -1,6 +1,5 @@
 ﻿using GiganteDeAco.Contracts.Common;
 using GiganteDeAco.Domain.Entities.Robos;
-using GiganteDeAco.Domain.Entities.Workflow.Etapas.Cabecas;
 using GiganteDeAco.Domain.Entities.Workflow.Etapas.Cotovelos;
 
 namespace GiganteDeAco.Domain.Rules;

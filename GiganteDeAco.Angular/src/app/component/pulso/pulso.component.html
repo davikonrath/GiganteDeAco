@@ -1,5 +1,10 @@
-<ng-container *ngIf="braco$ | async as braco">
-    <p>Pulso {{ obterDescricao(braco.rotacaoPulso) }}</p>
-    <button (click)="voltarRotacaoPulso()">Rotacionar <-</button>
-    <button (click)="avancarRotacaoPulso()">Rotacionar -></button>
-  </ng-container>
+<ng-container *ngIf="braco()">
+  <div class="cubo" [style.transform]="transformPulso(braco())">
+    <div class="face front-cubo">FRENTE</div>
+    <div class="face back-cubo">COSTAS</div>
+    <div class="face right-cubo">DIREITA</div>
+    <div class="face left-cubo">ESQUERDA</div>
+    <div class="face top-cubo">TOPO</div>
+    <div class="face bottom-cubo">FUNDO</div>
+  </div>
+</ng-container>

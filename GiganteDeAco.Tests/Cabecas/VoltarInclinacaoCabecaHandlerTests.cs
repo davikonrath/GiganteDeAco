@@ -47,7 +47,7 @@ public class VoltarInclinacaoCabecaHandlerTests
         Assert.Contains(response.Notificacoes, n => n.Mensagem == "Robo não encontrado.");
         Assert.Contains(response.Notificacoes, n => n.Codigo == 404);
     }
-    
+
     [Fact]
     public async Task HandleAsync_VoltarInclinacaoCabeca_AcaoNaoPermitidaLimiteMin()
     {

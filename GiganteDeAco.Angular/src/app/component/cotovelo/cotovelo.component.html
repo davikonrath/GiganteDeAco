@@ -1,27 +1,34 @@
 <ng-content *ngIf="braco$ | async as braco">
     <button class="btn btn-up" (click)="avancarContracaoCotovelo()"></button>
-    <div class="braco-out-container">
-        <div class="braco-container">
-            <div class="braco">
-                <div class="face-lateral front"></div>
-                <div class="face-lateral back"></div>
-                <div class="face-lateral right"></div>
-                <div class="face-lateral left"></div>
-                <div class="face-base top"></div>
-                <div class="face-base bottom"></div>
+    <div class="line">
+        <button class="btn btn-left" (click)="avancarRotacaoPulso()"></button>
+        <div class="braco-out-container">
+            <div class="braco-container">
+                <div class="braco">
+                    <div class="face-lateral front"></div>
+                    <div class="face-lateral back"></div>
+                    <div class="face-lateral right"></div>
+                    <div class="face-lateral left"></div>
+                    <div class="face-base top"></div>
+                    <div class="face-base bottom"></div>
+                </div>
             </div>
-        </div>
-        <div class="antebraco-container">
-            <div class="antebraco" [style.transform]="transformCotovelo(braco)">
-                <div class="face-lateral front"></div>
-                <div class="face-lateral back"></div>
-                <div class="face-lateral right"></div>
-                <div class="face-lateral left"></div>
-                <div class="face-base top"></div>
-                <div class="face-base bottom"></div>
+            <div class="antebraco-container">
+                <div class="antebraco" [style.transform]="transformCotovelo(braco)">
+                    <div class="face-lateral front"></div>
+                    <div class="face-lateral back"></div>
+                    <div class="face-lateral right"></div>
+                    <div class="face-lateral left"></div>
+                    <div class="face-base top"></div>
+                    <div class="face-base bottom"></div>
+                    <pulso class="pulso" [lado]="lado()" [braco]="braco" (attRobo)="atualizarRobo()"
+                        (attBraco)="atualizarBraco($event)" #pulso />
+                </div>
             </div>
+            <p>Cotovelo {{ obterDescricao(braco.contracaoCotovelo) }}</p>
+            <p>Pulso {{ obterRotacao(braco.rotacaoPulso) }}</p>
         </div>
-        <p>Cotovelo {{obterDescricao(braco.contracaoCotovelo)}}</p>
+        <button class="btn btn-right" (click)="voltarRotacaoPulso()"></button>
     </div>
     <button class="btn btn-down" (click)="voltarContracaoCotovelo()"></button>
 </ng-content>

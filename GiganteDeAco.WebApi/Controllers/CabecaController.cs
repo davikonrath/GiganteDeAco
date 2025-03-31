@@ -1,8 +1,6 @@
-﻿using GiganteDeAco.Application.Handlers;
-using GiganteDeAco.Contracts.Commands.Cabecas.Inclinacao;
+﻿using GiganteDeAco.Contracts.Commands.Cabecas.Inclinacao;
 using GiganteDeAco.Contracts.Commands.Cabecas.Rotacao;
 using GiganteDeAco.Contracts.Commands.Robos.Obter;
-using GiganteDeAco.Contracts.Common;
 using GiganteDeAco.Domain.Handlers;
 using Microsoft.AspNetCore.Mvc;
 

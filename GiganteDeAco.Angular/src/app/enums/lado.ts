@@ -1,4 +1,4 @@
-export enum Lado{
+export enum Lado {
     Esquerdo,
     Direito
 }

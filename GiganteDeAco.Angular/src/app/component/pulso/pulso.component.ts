@@ -1,33 +1,59 @@
-import { Component, input, OnInit, output } from '@angular/core';
-import { Lado } from '../../enums/lado';
-import { PulsoService } from '../../services/pulso.service';
-import { catchError, debounceTime, EMPTY, finalize, map, Observable, of, shareReplay, startWith, tap } from 'rxjs';
-import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
-import { BracoDto } from '../../models/bracoDto';
-import { RotacaoPulso } from '../../enums/rotacaoPulso';
+import { NgIf } from '@angular/common';
+import { Component, input, output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { Lado } from '../../enums/lado';
+import { RotacaoPulso } from '../../enums/rotacaoPulso';
+import { ObterRoboResponse } from '../../interfaces/obterRoboResponse';
+import { BracoDto } from '../../models/bracoDto';
+import { PulsoService } from '../../services/pulso.service';
 
 @Component({
   selector: 'pulso',
-  imports: [NgIf, AsyncPipe],
+  imports: [NgIf],
   templateUrl: './pulso.component.html',
   styleUrl: './pulso.component.css',
 })
-export class PulsoComponent implements OnInit{
+export class PulsoComponent {
 
-  constructor(private pulsoService: PulsoService, private toastr: ToastrService){ }
+  constructor(private pulsoService: PulsoService, private toastr: ToastrService) { }
 
   lado = input.required<Lado>();
   braco = input.required<BracoDto>();
 
-  braco$!: Observable<BracoDto>;
+  anguloRotacao: number = 0;
 
   attRobo = output();
+  attBraco = output<Observable<ObterRoboResponse>>();
 
-  ngOnInit() {
-    this.braco$ = of(this.braco());
+  transformPulso(braco: BracoDto) {
+    switch (braco.rotacaoPulso) {
+      case RotacaoPulso.MenosNoventa:
+        this.anguloRotacao = -90;
+        break;
+      case RotacaoPulso.MenosQuarentaCinco:
+        this.anguloRotacao = -45;
+        break;
+      case RotacaoPulso.EmRepouso:
+        this.anguloRotacao = 0;
+        break;
+      case RotacaoPulso.QuarentaCinco:
+        this.anguloRotacao = 45;
+        break;
+      case RotacaoPulso.Noventa:
+        this.anguloRotacao = 90;
+        break;
+      case RotacaoPulso.CentoTrintaCinco:
+        this.anguloRotacao = 135;
+        break;
+      case RotacaoPulso.CentoOitenta:
+        this.anguloRotacao = 180;
+        break;
+    }
+
+    return `rotateZ(${this.anguloRotacao}deg)`
   }
-  
+
   obterDescricao(e: RotacaoPulso): string {
     switch (e) {
       case RotacaoPulso.EmRepouso:
@@ -49,28 +75,15 @@ export class PulsoComponent implements OnInit{
     }
   }
 
-  avancarRotacaoPulso(){
-    this.braco$ = this.pulsoService.avancarRotacaoPulso(this.lado())
-      .pipe(
-        map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
-        catchError((err, caught) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
-          this.attRobo.emit()
-          this.toastr.error(err.error.notificacoes[0].mensagem)
-          return caught;
-        }),
-      )
+  avancarRotacaoPulso() {
+    var result = this.pulsoService.avancarRotacaoPulso(this.lado());
+
+    this.attBraco.emit(result);
   }
 
-  voltarRotacaoPulso(){
-    this.braco$ = this.pulsoService.voltarRotacaoPulso(this.lado()).pipe(
-      map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
-      catchError((err) => {
-        console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
-        this.attRobo.emit()
-        this.toastr.error(err.error.notificacoes[0].mensagem)
-        return EMPTY;
-      }),
-    )
+  voltarRotacaoPulso() {
+    var result = this.pulsoService.voltarRotacaoPulso(this.lado())
+
+    this.attBraco.emit(result);
   }
 }

@@ -17,7 +17,7 @@ public class Notificacao
 
     [JsonInclude]
     public int Codigo;
-    
+
     [JsonInclude]
     public string? Mensagem;
 }

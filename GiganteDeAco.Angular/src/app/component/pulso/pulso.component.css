@@ -1,0 +1,42 @@
+.cubo {
+    position: relative;
+    transform-style: preserve-3d;
+    height: 50px;
+    width: 50px;
+}
+
+.face {
+    display: flex;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(145deg, red, black);
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 10px;
+}
+
+.front-cubo {
+    transform: rotateX(0deg) translateZ(25px);
+}
+
+.back-cubo {
+    transform: rotateX(-180deg) translateZ(25px);
+}
+
+.right-cubo {
+    transform: rotateY(-90deg) translateZ(25px);
+}
+
+.left-cubo {
+    transform: rotateY(90deg) translateZ(25px);
+}
+
+.top-cubo {
+    transform: rotateX(90deg) translateZ(25px);
+}
+
+.bottom-cubo {
+    transform: rotateX(-90deg) translateZ(25px);
+}

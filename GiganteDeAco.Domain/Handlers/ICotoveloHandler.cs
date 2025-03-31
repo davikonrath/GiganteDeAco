@@ -1,6 +1,5 @@
 ﻿using GiganteDeAco.Contracts.Commands.Cotovelos.Contracao;
 using GiganteDeAco.Contracts.Commands.Robos.Obter;
-using GiganteDeAco.Contracts.Common;
 
 namespace GiganteDeAco.Domain.Handlers;
 

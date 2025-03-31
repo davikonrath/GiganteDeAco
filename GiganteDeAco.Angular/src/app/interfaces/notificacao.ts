@@ -1,4 +1,4 @@
-export interface Notificacao{
+export interface Notificacao {
     codigo: number,
     mensagem: string
 }

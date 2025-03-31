@@ -85,8 +85,8 @@ public class RoboHandler(IRoboRepository roboRepository) : IRoboHandler
             if (!response.IsValid())
                 return;
         }
-    }  
-    
+    }
+
     private static void ResetarRotacaoPulso(Robo robo, Response response)
     {
         foreach (var braco in robo.Bracos)

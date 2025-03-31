@@ -1,62 +1,41 @@
-.cabeca{
+.cabeca {
     display: flex;
-    width: 70%;
+    width: 40%;
     height: 80%;
     padding-top: 5%;
     flex-direction: column;
     align-items: center;
 }
 
-.cotovelo{
+.cotovelo {
     display: flex;
-    width: 100%;
-    height: 80%;
+    width: 30%;
+    height: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
-.pulso{
+.corpo-robo {
     display: flex;
-    width: 100%;
-    height: 20%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.corpo-robo{
-    display: flex;
-    width: 80%;
+    width: 90%;
     height: 100%;
     justify-content: space-around;
-    padding-left: 10%;
-    padding-right: 10%;
 }
 
-.braco-robo{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    height: 80%;
-    margin-top: 10%;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.comandos{
+.comandos {
     display: flex;
     justify-content: center;
 }
 
-.loadingScreen{
+.loadingScreen {
     height: 98dvh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.loading{
+.loading {
     animation: is-rotating 1s infinite;
     border: 6px solid #e5e5e5;
     border-radius: 50%;
@@ -64,7 +43,7 @@
     height: 30dvh;
     width: 30dvh;
 }
-      
+
 @keyframes is-rotating {
     to {
         transform: rotate(1turn);

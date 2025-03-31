@@ -1,6 +1,4 @@
-﻿using GiganteDeAco.Application.Handlers;
-using GiganteDeAco.Domain.Handlers;
-using GiganteDeAco.Domain.Repositories;
+﻿using GiganteDeAco.Domain.Repositories;
 using GiganteDeAco.Infra.Repositories;
 
 namespace GiganteDeAco.WebApi.Extensions;

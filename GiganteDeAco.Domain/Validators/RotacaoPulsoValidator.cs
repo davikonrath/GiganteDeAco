@@ -17,7 +17,7 @@ public static class RotacaoPulsoValidator
         if (!Enum.IsDefined(typeof(Lado), request.Lado))
             response.AddNotificacao(new NotificacaoBadRequest("Valor inválido para o enum Lado."));
     }
-    
+
     public static void Validar(this VoltarRotacaoPulsoRequest request, Response response)
     {
         if (request is null)

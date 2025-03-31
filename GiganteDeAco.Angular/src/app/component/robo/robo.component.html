@@ -1,9 +1,6 @@
 <ng-container *ngIf="robo$ | async as robo">
     <div class="corpo-robo">
-        <div class="braco-robo">
-            <cotovelo class="cotovelo" [lado]="Lado.Esquerdo" [braco]="robo.bracoEsquerdo" (attRobo)="atualizarRobo()" />
-            <pulso class="pulso" [lado]="Lado.Esquerdo" [braco]="robo.bracoEsquerdo" (attRobo)="atualizarRobo()" />
-        </div>
+        <cotovelo class="cotovelo" [lado]="Lado.Esquerdo" [braco]="robo.bracoEsquerdo" (attRobo)="atualizarRobo()" />
         <div class="cabeca">
             <cabeca [cabeca]="robo.cabeca" (attRobo)="atualizarRobo()" />
             <div class="comandos">
@@ -11,10 +8,7 @@
                 <button (click)="atualizarRobo()">RECARREGAR!</button>
             </div>
         </div>
-        <div class="braco-robo">
-            <cotovelo class="cotovelo" [lado]="Lado.Direito" [braco]="robo.bracoDireito" (attRobo)="atualizarRobo()" />
-            <pulso class="pulso" [lado]="Lado.Direito" [braco]="robo.bracoDireito" (attRobo)="atualizarRobo()" />
-        </div>
+        <cotovelo class="cotovelo" [lado]="Lado.Direito" [braco]="robo.bracoDireito" (attRobo)="atualizarRobo()" />
     </div>
 </ng-container>
 <ng-container *ngIf="loading">

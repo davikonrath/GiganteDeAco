@@ -10,8 +10,8 @@ public static class RotacaoCabecaRule
     {
         if (robo.Cabeca.EtapaInclinacao is EtapaInclinacaoCabecaParaBaixo)
             response.AddNotificacao(new NotificacaoAcaoNaoPermitida());
-    } 
-    
+    }
+
     public static void ValidarVoltar(Robo robo, Response response)
     {
         if (robo.Cabeca.EtapaInclinacao is EtapaInclinacaoCabecaParaBaixo)

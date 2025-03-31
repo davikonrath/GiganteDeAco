@@ -1,4 +1,4 @@
-export enum RotacaoCabeca{
+export enum RotacaoCabeca {
     MenosNoventa,
     MenosQuarentaCinco,
     EmRepouso,

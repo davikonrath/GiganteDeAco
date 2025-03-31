@@ -10,7 +10,7 @@ describe('PulsoComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PulsoComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PulsoComponent);
     component = fixture.componentInstance;

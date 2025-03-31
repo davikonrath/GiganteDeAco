@@ -1,4 +1,4 @@
-export enum InclinacaoCabeca{
+export enum InclinacaoCabeca {
     ParaCima,
     EmRepouso,
     ParaBaixo

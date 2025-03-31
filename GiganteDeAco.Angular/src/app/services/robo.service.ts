@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { ObterRoboResponse as ObterRoboResponse } from '../interfaces/obterRoboResponse';
+import { ObterRoboResponse } from '../interfaces/obterRoboResponse';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class RoboService {
 
@@ -12,11 +12,11 @@ export class RoboService {
 
   constructor(private http: HttpClient) { }
 
-  obterRobo(){
+  obterRobo() {
     return this.http.get<ObterRoboResponse>(this.endpoint + '/robo')
   }
 
-  resetarRobo(){
+  resetarRobo() {
     return this.http.put<ObterRoboResponse>(this.endpoint + '/reset', null)
   }
 }

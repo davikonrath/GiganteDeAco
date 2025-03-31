@@ -1,23 +1,28 @@
-import { Component, input, OnInit, output } from '@angular/core';
-import { catchError, EMPTY, map, Observable, of } from 'rxjs';
-import { BracoDto } from '../../models/bracoDto';
-import { Lado } from '../../enums/lado';
-import { CotoveloService } from '../../services/cotovelo.service';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, input, OnInit, output, viewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, EMPTY, map, Observable, of } from 'rxjs';
 import { ContracaoCotovelo } from '../../enums/contracaoCotovelo';
+import { Lado } from '../../enums/lado';
+import { RotacaoPulso } from '../../enums/rotacaoPulso';
+import { ObterRoboResponse } from '../../interfaces/obterRoboResponse';
+import { BracoDto } from '../../models/bracoDto';
+import { CotoveloService } from '../../services/cotovelo.service';
+import { PulsoComponent } from '../pulso/pulso.component';
 
 @Component({
   selector: 'cotovelo',
-  imports: [NgIf, AsyncPipe],
+  imports: [NgIf, AsyncPipe, PulsoComponent],
   templateUrl: './cotovelo.component.html',
   styleUrl: './cotovelo.component.css'
 })
 export class CotoveloComponent implements OnInit {
 
-  constructor(private cotoveloService: CotoveloService) { }
+  constructor(private cotoveloService: CotoveloService, private toastr: ToastrService) { }
 
-  lado = input.required<Lado>();
-  braco = input.required<BracoDto>();
+  readonly pulso = viewChild.required<PulsoComponent>("pulso");
+  readonly lado = input.required<Lado>();
+  readonly braco = input.required<BracoDto>();
 
   braco$!: Observable<BracoDto>;
   anguloContracao: number = 0;
@@ -26,6 +31,21 @@ export class CotoveloComponent implements OnInit {
 
   ngOnInit() {
     this.braco$ = of(this.braco());
+  }
+
+  atualizarRobo() {
+    this.attRobo.emit()
+  }
+
+  atualizarBraco(braco: Observable<ObterRoboResponse>) {
+    this.braco$ = braco.pipe(
+      map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
+      catchError((err) => {
+        this.toastr.error(err.error.notificacoes[0].mensagem);
+        this.attRobo.emit();
+        return EMPTY;
+      }),
+    )
   }
 
   obterDescricao(e: ContracaoCotovelo): string {
@@ -41,6 +61,18 @@ export class CotoveloComponent implements OnInit {
       default:
         return "Contração Inválida";
     }
+  }
+
+  obterRotacao(e: RotacaoPulso) {
+    return this.pulso().obterDescricao(e);
+  }
+
+  avancarRotacaoPulso() {
+    this.pulso().avancarRotacaoPulso();
+  }
+
+  voltarRotacaoPulso() {
+    this.pulso().voltarRotacaoPulso();
   }
 
   transformCotovelo(braco: BracoDto) {
@@ -59,10 +91,10 @@ export class CotoveloComponent implements OnInit {
         break;
     }
 
-    if(this.lado() === Lado.Direito)
+    if (this.lado() === Lado.Direito)
       return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(-25deg)`
-      
-    
+
+
     return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(25deg)`
   }
 
@@ -71,7 +103,7 @@ export class CotoveloComponent implements OnInit {
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
         catchError((err) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
+          this.toastr.error(err.error.notificacoes[0].mensagem)
           this.attRobo.emit()
           return EMPTY;
         }),
@@ -83,7 +115,7 @@ export class CotoveloComponent implements OnInit {
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
         catchError((err) => {
-          console.error('Erro:', err.error.notificacoes[0].mensagem); //ATUALIZAR PARA NOTIFICACAO
+          this.toastr.error(err.error.notificacoes[0].mensagem)
           this.attRobo.emit()
           return EMPTY;
         }),
