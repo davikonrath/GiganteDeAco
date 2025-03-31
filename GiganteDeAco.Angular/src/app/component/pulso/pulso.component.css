@@ -3,6 +3,7 @@
     transform-style: preserve-3d;
     height: 50px;
     width: 50px;
+    transition: transform 0.7s ease;
 }
 
 .face {
@@ -14,29 +15,30 @@
     justify-content: center;
     align-items: center;
     color: aliceblue;
-    font-size: 10px;
+    font-size: 8px;
+    border: 0;
 }
 
-.front-cubo {
+.front {
     transform: rotateX(0deg) translateZ(25px);
 }
 
-.back-cubo {
+.back {
     transform: rotateX(-180deg) translateZ(25px);
 }
 
-.right-cubo {
+.right {
     transform: rotateY(-90deg) translateZ(25px);
 }
 
-.left-cubo {
+.left {
     transform: rotateY(90deg) translateZ(25px);
 }
 
-.top-cubo {
+.top {
     transform: rotateX(90deg) translateZ(25px);
 }
 
-.bottom-cubo {
+.bottom {
     transform: rotateX(-90deg) translateZ(25px);
 }

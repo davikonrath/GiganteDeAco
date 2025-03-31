@@ -1,11 +1,10 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, input, OnInit, output, viewChild } from '@angular/core';
+import { Component, input, OnInit, viewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, EMPTY, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { ContracaoCotovelo } from '../../enums/contracaoCotovelo';
 import { Lado } from '../../enums/lado';
 import { RotacaoPulso } from '../../enums/rotacaoPulso';
-import { ObterRoboResponse } from '../../interfaces/obterRoboResponse';
 import { BracoDto } from '../../models/bracoDto';
 import { CotoveloService } from '../../services/cotovelo.service';
 import { PulsoComponent } from '../pulso/pulso.component';
@@ -17,7 +16,6 @@ import { PulsoComponent } from '../pulso/pulso.component';
   styleUrl: './cotovelo.component.css'
 })
 export class CotoveloComponent implements OnInit {
-
   constructor(private cotoveloService: CotoveloService, private toastr: ToastrService) { }
 
   readonly pulso = viewChild.required<PulsoComponent>("pulso");
@@ -25,31 +23,24 @@ export class CotoveloComponent implements OnInit {
   readonly braco = input.required<BracoDto>();
 
   braco$!: Observable<BracoDto>;
-  anguloContracao: number = 0;
+  rotateBraco$!: Observable<string>;
+  descricaoContracao$!: Observable<string>;
+  descricaoPulso$!: Observable<string>;
 
-  attRobo = output();
+  anguloContracao: number = 0;
+  bracoBackup!: BracoDto;
 
   ngOnInit() {
-    this.braco$ = of(this.braco());
+    this.braco$ = of(this.braco())
+    this.transformCotovelo(this.braco$)
   }
 
-  atualizarRobo() {
-    this.attRobo.emit()
+  atualizarDescricaoPulso(braco: BracoDto) {
+    this.descricaoPulso$ = of(this.obterDescricaoPulso(braco));
   }
 
-  atualizarBraco(braco: Observable<ObterRoboResponse>) {
-    this.braco$ = braco.pipe(
-      map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
-      catchError((err) => {
-        this.toastr.error(err.error.notificacoes[0].mensagem);
-        this.attRobo.emit();
-        return EMPTY;
-      }),
-    )
-  }
-
-  obterDescricao(e: ContracaoCotovelo): string {
-    switch (e) {
+  obterDescricao(braco: BracoDto): string {
+    switch (braco.contracaoCotovelo) {
       case ContracaoCotovelo.EmRepouso:
         return "Em Repouso";
       case ContracaoCotovelo.Leve:
@@ -63,8 +54,25 @@ export class CotoveloComponent implements OnInit {
     }
   }
 
-  obterRotacao(e: RotacaoPulso) {
-    return this.pulso().obterDescricao(e);
+  obterDescricaoPulso(braco: BracoDto): string {
+    switch (braco.rotacaoPulso) {
+      case RotacaoPulso.EmRepouso:
+        return "Em Repouso";
+      case RotacaoPulso.MenosNoventa:
+        return "-90°";
+      case RotacaoPulso.MenosQuarentaCinco:
+        return "-45°";
+      case RotacaoPulso.QuarentaCinco:
+        return "45°";
+      case RotacaoPulso.Noventa:
+        return "90°";
+      case RotacaoPulso.CentoTrintaCinco:
+        return "135°";
+      case RotacaoPulso.CentoOitenta:
+        return "180°";
+      default:
+        return "Rotação Inválida";
+    }
   }
 
   avancarRotacaoPulso() {
@@ -75,50 +83,56 @@ export class CotoveloComponent implements OnInit {
     this.pulso().voltarRotacaoPulso();
   }
 
-  transformCotovelo(braco: BracoDto) {
-    switch (braco.contracaoCotovelo) {
-      case ContracaoCotovelo.EmRepouso:
-        this.anguloContracao = 15;
-        break;
-      case ContracaoCotovelo.Leve:
-        this.anguloContracao = 80;
-        break;
-      case ContracaoCotovelo.Normal:
-        this.anguloContracao = 120;
-        break;
-      case ContracaoCotovelo.Forte:
-        this.anguloContracao = 160;
-        break;
-    }
+  transformCotovelo(braco: Observable<BracoDto>) {
+    this.rotateBraco$ = braco.pipe(
+      map((braco) => {
+        this.bracoBackup = braco;
 
-    if (this.lado() === Lado.Direito)
-      return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(-25deg)`
+        switch (this.bracoBackup.contracaoCotovelo) {
+          case ContracaoCotovelo.EmRepouso:
+            this.anguloContracao = 15;
+            break;
+          case ContracaoCotovelo.Leve:
+            this.anguloContracao = 80;
+            break;
+          case ContracaoCotovelo.Normal:
+            this.anguloContracao = 120;
+            break;
+          case ContracaoCotovelo.Forte:
+            this.anguloContracao = 160;
+            break;
+        }
 
+        this.descricaoContracao$ = of(this.obterDescricao(this.bracoBackup));
+        this.descricaoPulso$ = of(this.obterDescricaoPulso(this.bracoBackup));
 
-    return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(25deg)`
+        if (this.lado() === Lado.Direito)
+          return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(25deg)`
+
+        return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(-25deg)`
+      }),
+    );
   }
 
   avancarContracaoCotovelo() {
-    this.braco$ = this.cotoveloService.avancarContracaoCotovelo(this.lado())
+    this.transformCotovelo(this.cotoveloService.avancarContracaoCotovelo(this.lado())
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
         catchError((err) => {
           this.toastr.error(err.error.notificacoes[0].mensagem)
-          this.attRobo.emit()
-          return EMPTY;
+          return of(this.bracoBackup);
         }),
-      )
+      ))
   }
 
   voltarContracaoCotovelo() {
-    this.braco$ = this.cotoveloService.voltarContracaoCotovelo(this.lado())
+    this.transformCotovelo(this.cotoveloService.voltarContracaoCotovelo(this.lado())
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
         catchError((err) => {
           this.toastr.error(err.error.notificacoes[0].mensagem)
-          this.attRobo.emit()
-          return EMPTY;
+          return of(this.bracoBackup);
         }),
-      )
+      ))
   }
 }

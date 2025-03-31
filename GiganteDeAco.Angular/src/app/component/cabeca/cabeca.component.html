@@ -5,7 +5,7 @@
     <div class="line">
         <button class="btn btn-left" (click)="voltarRotacaoCabeca()"></button>
         <div class="cubo-container">
-            <div class="cubo" [style.transform]="transformCabeca(cabeca)">
+            <div class="cubo" [style.transform]="rotateCabeca$ | async">
                 <div class="face front">0 . 0</div>
                 <div class="face back">COSTAS</div>
                 <div class="face right">DIREITA</div>
@@ -20,7 +20,7 @@
         <button class="btn btn-down" (click)="avancarInclinacaoCabeca()"></button>
     </div>
     <div class="cabeca-descricao">
-        <p>Inclinação Cabeça {{obterDescricaoInclinacao(cabeca.inclinacao)}}</p>
-        <p>Rotação Cabeça {{obterDescricaoRotacao(cabeca.rotacao)}}</p>
+        <p>Inclinação Cabeça {{ descricaoInclinacao$ | async }}</p>
+        <p>Rotação Cabeça {{ descricaoRotacao$ | async }}</p>
     </div>
 </ng-container>

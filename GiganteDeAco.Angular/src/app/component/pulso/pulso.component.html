@@ -1,10 +1,10 @@
-<ng-container *ngIf="braco()">
-  <div class="cubo" [style.transform]="transformPulso(braco())">
-    <div class="face front-cubo">FRENTE</div>
-    <div class="face back-cubo">COSTAS</div>
-    <div class="face right-cubo">DIREITA</div>
-    <div class="face left-cubo">ESQUERDA</div>
-    <div class="face top-cubo">TOPO</div>
-    <div class="face bottom-cubo">FUNDO</div>
+<ng-container *ngIf="braco$ | async">
+  <div class="cubo" [style.transform]="rotatePulso$ | async">
+    <div class="face front">FRENTE</div>
+    <div class="face back">COSTAS</div>
+    <div class="face right">DIREITA</div>
+    <div class="face left">ESQUERDA</div>
+    <div class="face top">TOPO</div>
+    <div class="face bottom">FUNDO</div>
   </div>
 </ng-container>

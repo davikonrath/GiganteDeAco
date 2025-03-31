@@ -1,8 +1,9 @@
 <ng-container *ngIf="robo$ | async as robo">
-    <div class="corpo-robo">
+    <div class="container-robo">
+        <div class="corpo-robo"></div>
         <cotovelo class="cotovelo" [lado]="Lado.Esquerdo" [braco]="robo.bracoEsquerdo" (attRobo)="atualizarRobo()" />
-        <div class="cabeca">
-            <cabeca [cabeca]="robo.cabeca" (attRobo)="atualizarRobo()" />
+        <div class="cabeca-container">
+            <cabeca class="cabeca" [cabeca]="robo.cabeca" (attRobo)="atualizarRobo()" />
             <div class="comandos">
                 <button (click)="resetarRobo()">RESETAR!</button>
                 <button (click)="atualizarRobo()">RECARREGAR!</button>

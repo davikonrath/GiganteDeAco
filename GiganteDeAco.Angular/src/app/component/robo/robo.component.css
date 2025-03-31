@@ -1,6 +1,15 @@
+.cabeca-container {
+    display: flex;
+    width: 30%;
+    height: 80%;
+    padding-top: 5%;
+    flex-direction: column;
+    align-items: center;
+}
+
 .cabeca {
     display: flex;
-    width: 40%;
+    width: 100%;
     height: 80%;
     padding-top: 5%;
     flex-direction: column;
@@ -9,18 +18,29 @@
 
 .cotovelo {
     display: flex;
-    width: 30%;
+    width: 50%;
     height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.corpo-robo {
+.container-robo {
     display: flex;
     width: 90%;
     height: 100%;
     justify-content: space-around;
+    position: relative;
+}
+
+.corpo-robo {
+    position: absolute;
+    z-index: -1;
+    height: 25%;
+    width: 80%;
+    margin: 40px;
+    border-radius: 5%;
+    background: linear-gradient(145deg, #007c72, #018a7c);
 }
 
 .comandos {

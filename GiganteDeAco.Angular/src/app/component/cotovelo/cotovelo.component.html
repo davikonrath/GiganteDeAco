@@ -14,19 +14,19 @@
                 </div>
             </div>
             <div class="antebraco-container">
-                <div class="antebraco" [style.transform]="transformCotovelo(braco)">
+                <div class="antebraco" [style.transform]="rotateBraco$ | async">
                     <div class="face-lateral front"></div>
                     <div class="face-lateral back"></div>
                     <div class="face-lateral right"></div>
                     <div class="face-lateral left"></div>
                     <div class="face-base top"></div>
                     <div class="face-base bottom"></div>
-                    <pulso class="pulso" [lado]="lado()" [braco]="braco" (attRobo)="atualizarRobo()"
-                        (attBraco)="atualizarBraco($event)" #pulso />
+                    <pulso class="pulso" [lado]="lado()" [braco]="braco"
+                        (attRotacaoPulso)="atualizarDescricaoPulso($event)" #pulso />
                 </div>
             </div>
-            <p>Cotovelo {{ obterDescricao(braco.contracaoCotovelo) }}</p>
-            <p>Pulso {{ obterRotacao(braco.rotacaoPulso) }}</p>
+            <p>Cotovelo {{ descricaoContracao$ | async }}</p>
+            <p>Pulso {{ descricaoPulso$ | async }}</p>
         </div>
         <button class="btn btn-right" (click)="voltarRotacaoPulso()"></button>
     </div>

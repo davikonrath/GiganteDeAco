@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, EMPTY, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { InclinacaoCabeca } from '../../enums/inclinacaoCabeca';
 import { RotacaoCabeca } from '../../enums/rotacaoCabeca';
 import { CabecaDto } from '../../models/cabecaDto';
@@ -11,7 +11,7 @@ import { CabecaService } from '../../services/cabeca.service';
   selector: 'cabeca',
   imports: [NgIf, AsyncPipe],
   templateUrl: './cabeca.component.html',
-  styleUrl: './cabeca.component.css'
+  styleUrl: './cabeca.component.css',
 })
 export class CabecaComponent implements OnInit {
 
@@ -20,17 +20,21 @@ export class CabecaComponent implements OnInit {
   cabeca = input.required<CabecaDto>();
 
   cabeca$!: Observable<CabecaDto>
+  rotateCabeca$!: Observable<string>;
+  descricaoInclinacao$!: Observable<string>;
+  descricaoRotacao$!: Observable<string>;
+
+  cabecaBackup!: CabecaDto;
   anguloInclinacao: number = 10;
   anguloRotacao: number = 0;
 
-  attRobo = output();
-
   ngOnInit() {
-    this.cabeca$ = of(this.cabeca())
+    this.cabeca$ = of(this.cabeca());
+    this.transformCabeca(this.cabeca$);
   }
 
-  obterDescricaoRotacao(e: RotacaoCabeca): string {
-    switch (e) {
+  obterDescricaoRotacao(cabeca: CabecaDto) {
+    switch (cabeca.rotacao) {
       case RotacaoCabeca.EmRepouso:
         return "Em Repouso";
       case RotacaoCabeca.MenosNoventa:
@@ -46,8 +50,8 @@ export class CabecaComponent implements OnInit {
     }
   }
 
-  obterDescricaoInclinacao(e: InclinacaoCabeca): string {
-    switch (e) {
+  obterDescricaoInclinacao(cabeca: CabecaDto) {
+    switch (cabeca.inclinacao) {
       case InclinacaoCabeca.EmRepouso:
         return "Em Repouso";
       case InclinacaoCabeca.ParaCima:
@@ -57,86 +61,93 @@ export class CabecaComponent implements OnInit {
       default:
         return "Inclinação Inválida";
     }
+
   }
 
-  transformCabeca(cabeca: CabecaDto) {
-    switch (cabeca.inclinacao) {
-      case InclinacaoCabeca.ParaCima:
-        this.anguloInclinacao = 30;
-        break;
-      case InclinacaoCabeca.EmRepouso:
-        this.anguloInclinacao = -10;
-        break;
-      case InclinacaoCabeca.ParaBaixo:
-        this.anguloInclinacao = -40;
-        break;
-    }
+  transformCabeca(cabeca: Observable<CabecaDto>) {
+    this.rotateCabeca$ = cabeca.pipe(
+      map((cabeca) => {
+        this.cabecaBackup = cabeca;
 
-    switch (cabeca.rotacao) {
-      case RotacaoCabeca.MenosNoventa:
-        this.anguloRotacao = -90;
-        break;
-      case RotacaoCabeca.MenosQuarentaCinco:
-        this.anguloRotacao = -45;
-        break;
-      case RotacaoCabeca.EmRepouso:
-        this.anguloRotacao = 0;
-        break;
-      case RotacaoCabeca.QuarentaCinco:
-        this.anguloRotacao = 45;
-        break;
-      case RotacaoCabeca.Noventa:
-        this.anguloRotacao = 90;
-        break;
-    }
-    return `rotateX(${this.anguloInclinacao}deg) rotateY(${this.anguloRotacao}deg)`
+        switch (this.cabecaBackup.inclinacao) {
+          case InclinacaoCabeca.ParaCima:
+            this.anguloInclinacao = 30;
+            break;
+          case InclinacaoCabeca.EmRepouso:
+            this.anguloInclinacao = -10;
+            break;
+          case InclinacaoCabeca.ParaBaixo:
+            this.anguloInclinacao = -40;
+            break;
+        }
+
+        switch (this.cabecaBackup.rotacao) {
+          case RotacaoCabeca.MenosNoventa:
+            this.anguloRotacao = -90;
+            break;
+          case RotacaoCabeca.MenosQuarentaCinco:
+            this.anguloRotacao = -45;
+            break;
+          case RotacaoCabeca.EmRepouso:
+            this.anguloRotacao = 0;
+            break;
+          case RotacaoCabeca.QuarentaCinco:
+            this.anguloRotacao = 45;
+            break;
+          case RotacaoCabeca.Noventa:
+            this.anguloRotacao = 90;
+            break;
+        }
+
+        this.descricaoInclinacao$ = of(this.obterDescricaoInclinacao(cabeca));
+        this.descricaoRotacao$ = of(this.obterDescricaoRotacao(cabeca));
+
+        return `rotateX(${this.anguloInclinacao}deg) rotateY(${this.anguloRotacao}deg)`
+      }));
   }
 
   avancarRotacaoCabeca() {
-    this.cabeca$ = this.cabecaService.avancarRotacaoCabeca()
+    this.transformCabeca(this.cabecaService.avancarRotacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
           this.toastr.error(err.error.notificacoes[0].mensagem)
-          this.attRobo.emit()
-          return EMPTY;
+          return of(this.cabecaBackup);
         }),
       )
+    )
   }
 
   voltarRotacaoCabeca() {
-    this.cabeca$ = this.cabecaService.voltarRotacaoCabeca()
+    this.transformCabeca(this.cabecaService.voltarRotacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
           this.toastr.error(err.error.notificacoes[0].mensagem)
-          this.attRobo.emit()
-          return EMPTY;
+          return of(this.cabecaBackup);
         }),
-      )
+      ))
   }
 
   avancarInclinacaoCabeca() {
-    this.cabeca$ = this.cabecaService.avancarInclinacaoCabeca()
+    this.transformCabeca(this.cabecaService.avancarInclinacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
           this.toastr.error(err.error.notificacoes[0].mensagem)
-          this.attRobo.emit()
-          return EMPTY;
+          return of(this.cabecaBackup);
         }),
-      )
+      ))
   }
 
   voltarInclinacaoCabeca() {
-    this.cabeca$ = this.cabecaService.voltarInclinacaoCabeca()
+    this.transformCabeca(this.cabecaService.voltarInclinacaoCabeca()
       .pipe(
         map(response => response.robo.cabeca),
         catchError((err) => {
           this.toastr.error(err.error.notificacoes[0].mensagem)
-          this.attRobo.emit()
-          return EMPTY;
+          return of(this.cabecaBackup);
         }),
-      )
+      ))
   }
 }
