@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiganteDeAco.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiganteDeAco.Contracts", "GiganteDeAco.Contracts\GiganteDeAco.Contracts.csproj", "{82E149CB-701F-4670-8EB1-386A354FCB38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiganteDeAco.Tests", "GiganteDeAco.Tests\GiganteDeAco.Tests.csproj", "{E753388D-4979-4FC4-82CC-DA6C8BA48FC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{82E149CB-701F-4670-8EB1-386A354FCB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82E149CB-701F-4670-8EB1-386A354FCB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82E149CB-701F-4670-8EB1-386A354FCB38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E753388D-4979-4FC4-82CC-DA6C8BA48FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E753388D-4979-4FC4-82CC-DA6C8BA48FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E753388D-4979-4FC4-82CC-DA6C8BA48FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E753388D-4979-4FC4-82CC-DA6C8BA48FC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

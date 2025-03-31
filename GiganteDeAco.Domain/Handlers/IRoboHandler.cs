@@ -6,5 +6,5 @@ namespace GiganteDeAco.Domain.Handlers;
 public interface IRoboHandler
 {
     Task<ObterRoboResponse> HandleAsync(ObterRoboRequest request);
-    Task<ObterRoboResponse> HandleAsync(ResetaRoboRequest request);
+    Task<ObterRoboResponse> HandleAsync(ResetarRoboRequest request);
 }

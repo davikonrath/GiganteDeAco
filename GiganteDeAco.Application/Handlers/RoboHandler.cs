@@ -28,7 +28,7 @@ public class RoboHandler(IRoboRepository roboRepository) : IRoboHandler
         return response;
     }
 
-    public async Task<ObterRoboResponse> HandleAsync(ResetaRoboRequest request)
+    public async Task<ObterRoboResponse> HandleAsync(ResetarRoboRequest request)
     {
         var response = new ObterRoboResponse();
 

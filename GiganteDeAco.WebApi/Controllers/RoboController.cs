@@ -21,7 +21,7 @@ public class RoboController(IRoboHandler roboHandler) : ControllerBase
     [HttpPut("reset")]
     public async Task<ObterRoboResponse> ResetarRobo()
     {
-        var request = new ResetaRoboRequest();
+        var request = new ResetarRoboRequest();
         return await _roboHandler.HandleAsync(request);
     }
 }

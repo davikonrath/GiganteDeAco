@@ -4,5 +4,5 @@ namespace GiganteDeAco.Domain.Repositories;
 
 public interface IRoboRepository
 {
-    Task<Robo> ObterRobo();
+    Task<Robo?> ObterRobo();
 }
