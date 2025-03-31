@@ -1,21 +1,47 @@
 .cabeca{
     display: flex;
-    min-width: 100%;
-    height: 30%;
-    justify-content: center;
+    width: 70%;
+    height: 80%;
+    padding-top: 5%;
+    flex-direction: column;
+    align-items: center;
 }
 
-.corpo{
+.cotovelo{
     display: flex;
     width: 100%;
-    height: 30%;
-    justify-content: space-between;
+    height: 80%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.braco{
+.pulso{
+    display: flex;
+    width: 100%;
+    height: 20%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.corpo-robo{
+    display: flex;
+    width: 80%;
+    height: 100%;
+    justify-content: space-around;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.braco-robo{
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 30%;
+    height: 80%;
+    margin-top: 10%;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .comandos{

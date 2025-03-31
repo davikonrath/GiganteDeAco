@@ -13,13 +13,14 @@ import { ContracaoCotovelo } from '../../enums/contracaoCotovelo';
   styleUrl: './cotovelo.component.css'
 })
 export class CotoveloComponent implements OnInit {
-  
-  constructor(private cotoveloService: CotoveloService){ }
+
+  constructor(private cotoveloService: CotoveloService) { }
 
   lado = input.required<Lado>();
   braco = input.required<BracoDto>();
 
   braco$!: Observable<BracoDto>;
+  anguloContracao: number = 0;
 
   attRobo = output();
 
@@ -42,7 +43,30 @@ export class CotoveloComponent implements OnInit {
     }
   }
 
-  avancarContracaoCotovelo(){
+  transformCotovelo(braco: BracoDto) {
+    switch (braco.contracaoCotovelo) {
+      case ContracaoCotovelo.EmRepouso:
+        this.anguloContracao = 15;
+        break;
+      case ContracaoCotovelo.Leve:
+        this.anguloContracao = 80;
+        break;
+      case ContracaoCotovelo.Normal:
+        this.anguloContracao = 120;
+        break;
+      case ContracaoCotovelo.Forte:
+        this.anguloContracao = 160;
+        break;
+    }
+
+    if(this.lado() === Lado.Direito)
+      return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(-25deg)`
+      
+    
+    return `rotateX(${this.anguloContracao}deg) rotateY(0deg) rotateZ(25deg)`
+  }
+
+  avancarContracaoCotovelo() {
     this.braco$ = this.cotoveloService.avancarContracaoCotovelo(this.lado())
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
@@ -54,7 +78,7 @@ export class CotoveloComponent implements OnInit {
       )
   }
 
-  voltarContracaoCotovelo(){
+  voltarContracaoCotovelo() {
     this.braco$ = this.cotoveloService.voltarContracaoCotovelo(this.lado())
       .pipe(
         map(response => this.lado() == Lado.Direito ? response.robo.bracoDireito : response.robo.bracoEsquerdo),
@@ -64,5 +88,5 @@ export class CotoveloComponent implements OnInit {
           return EMPTY;
         }),
       )
-  } 
+  }
 }

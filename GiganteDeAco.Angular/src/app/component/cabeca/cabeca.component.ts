@@ -19,6 +19,8 @@ export class CabecaComponent implements OnInit{
   cabeca = input.required<CabecaDto>();
   
   cabeca$!: Observable<CabecaDto>
+  anguloInclinacao: number = 10;
+  anguloRotacao: number = 0;
   
   attRobo = output();
 
@@ -54,6 +56,39 @@ export class CabecaComponent implements OnInit{
       default:
         return "Inclinação Inválida";
     }
+  }
+
+  transformCabeca(cabeca : CabecaDto){
+    switch(cabeca.inclinacao){
+      case InclinacaoCabeca.ParaCima:
+        this.anguloInclinacao = 30;
+        break;
+      case InclinacaoCabeca.EmRepouso:
+        this.anguloInclinacao = -10;
+        break;
+      case InclinacaoCabeca.ParaBaixo:
+        this.anguloInclinacao = -40;
+        break;
+    }
+
+    switch(cabeca.rotacao){
+      case RotacaoCabeca.MenosNoventa:
+        this.anguloRotacao = -90;
+        break;
+      case RotacaoCabeca.MenosQuarentaCinco:
+        this.anguloRotacao = -45;
+        break;
+      case RotacaoCabeca.EmRepouso:
+        this.anguloRotacao = 0;
+        break;
+      case RotacaoCabeca.QuarentaCinco:
+        this.anguloRotacao = 45;
+        break;
+      case RotacaoCabeca.Noventa:
+        this.anguloRotacao = 90;
+        break;
+    }
+    return `rotateX(${this.anguloInclinacao}deg) rotateY(${this.anguloRotacao}deg)`
   }
 
   avancarRotacaoCabeca(){

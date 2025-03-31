@@ -1,0 +1,150 @@
+.cubo-container {
+    height: 100px;
+    width: 100px;
+    perspective: 1000px;
+    padding: 40px;
+}
+
+.cubo {
+    position: relative;
+    transform-style: preserve-3d;
+    height: 100%;
+    width: 100%;
+}
+
+.face {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(145deg, #00bfae, #009688);
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 15px;
+}
+
+.front {
+    transform: rotateX(0deg) translateZ(50px);
+}
+
+.back {
+    transform: rotateX(180deg) translateZ(50px);
+}
+
+.right {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+.left {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+.face {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(145deg, #00bfae, #009688);
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 15px;
+}
+
+.front {
+    transform: rotateX(0deg) translateZ(50px);
+}
+
+.back {
+    transform: rotateX(180deg) translateZ(50px);
+}
+
+.right {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+.left {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+.btn {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, #00bfae, #009688);
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn:hover {
+    background: linear-gradient(145deg, #009688, #00bfae);
+    transform: translateY(-6px);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3), -6px -6px 15px rgba(255, 255, 255, 0.3);
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.2);
+}
+
+.btn-up::before {
+    content: '▲';
+    font-size: 30px;
+    position: relative;
+    top: -1px;
+}
+
+
+.btn-down::before {
+    content: '▼';
+    font-size: 30px;
+    position: relative;
+    top: 1px;
+}
+
+
+.btn-left::before {
+    content: '◀';
+    font-size: 30px;
+    position: relative;
+    top: 0px;
+}
+
+.btn-right::before {
+    content: '▶';
+    font-size: 30px;
+    position: relative;
+    top: 0px;
+}
+
+.cabeca-descricao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

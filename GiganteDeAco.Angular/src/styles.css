@@ -4,14 +4,86 @@ html{
 
 body {
     display: flex;
-    height: 98dvh;
+    height: 100dvh;
     margin: 0;
-    padding: 1dvh;
 }
 
 .app{
     display: flex;
     flex: 1;
+}
+
+.line{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(145deg, #00bfae, #009688);
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 60px;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn:hover {
+  background: linear-gradient(145deg, #009688, #00bfae);
+  transform: translateY(-6px);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3), -6px -6px 15px rgba(255, 255, 255, 0.3);
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.2);
+}
+
+.btn-up::before {
+  content: '▲';
+  font-size: 30px;
+  position: relative;
+  top: -1px;
+}
+
+
+.btn-down::before {
+  content: '▼';
+  font-size: 30px;
+  position: relative;
+  top: 1px;
+}
+
+
+.btn-left::before {
+  content: '◀';
+  font-size: 30px;
+  position: relative;
+  top: 0px;
+}
+
+.btn-right::before {
+  content: '▶';
+  font-size: 30px;
+  position: relative;
+  top: 0px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
 }
 
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */

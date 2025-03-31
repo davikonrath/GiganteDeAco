@@ -1,8 +1,26 @@
 <ng-container *ngIf="cabeca$ | async as cabeca">
-    <p>Inclinação Cabeça {{obterDescricaoInclinacao(cabeca.inclinacao)}}</p>
-    <button (click)="voltarInclinacaoCabeca()">Inclinar <-</button>
-    <button (click)="avancarInclinacaoCabeca()">Inclinar -></button>
-    <p>Rotação Cabeça {{obterDescricaoRotacao(cabeca.rotacao)}}</p>
-    <button (click)="voltarRotacaoCabeca()">Rotacionar <-</button>
-    <button (click)="avancarRotacaoCabeca()">Rotacionar -></button>
+    <div class="line">
+        <button class="btn btn-up" (click)="voltarInclinacaoCabeca()"></button>
+    </div>
+    <div class="line">
+        <button class="btn btn-left" (click)="voltarRotacaoCabeca()"></button>
+        <div class="cubo-container">
+            <div class="cubo" [style.transform]="transformCabeca(cabeca)">
+                <div class="face front">0 . 0</div>
+                <div class="face back">COSTAS</div>
+                <div class="face right">DIREITA</div>
+                <div class="face left">ESQUERDA</div>
+                <div class="face top">TOPO</div>
+                <div class="face bottom">FUNDO</div>
+            </div>
+        </div>
+        <button class="btn btn-right" (click)="avancarRotacaoCabeca()"></button>
+    </div>
+    <div class="line">
+        <button class="btn btn-down" (click)="avancarInclinacaoCabeca()"></button>
+    </div>
+    <div class="cabeca-descricao">
+        <p>Inclinação Cabeça {{obterDescricaoInclinacao(cabeca.inclinacao)}}</p>
+        <p>Rotação Cabeça {{obterDescricaoRotacao(cabeca.rotacao)}}</p>
+    </div>
 </ng-container>
